@@ -1,15 +1,38 @@
+# matriz = [
+#     [' ','a', 'b', 'c'],
+#     ['A', 'A', 'A', 'B'],
+#     ['B', 'C', 'C', '0'],
+#     ['C', 'C', 'C', '0']
+# ]
+
+
 matriz = [
-    [' ','a', 'b', 'c'],
-    ['A', 'A', 'A', 'B'],
-    ['B', 'C', 'C', '0'],
-    ['C', 'C', 'C', '0']
+    [' ','a','b','c','d','e','f',':'],
+    ['A','B','C','D','E','-','-','-'],
+    ['B','F','c','-','-','-','-','G'],
+    ['C','-','-','-','-','H','-','G'],
+    ['D','-','-','-','H','-','-','G'],
+    ['E','-','-','-','-','-','-','I'],
+    ['F','-','-','-','-','-','-','G'],
+    ['G','J','-','-','-','-','K','G'],
+    ['H','-','-','-','-','-','L','-'],
+    ['I','L','-','-','-','-','M','-'],
+    ['J','N','O','-','-','-','-','-'],
+    ['K','-','-','-','-','P','-','-'],
+    ['L','Q','R','-','-','-','-','-'],
+    ['M','-','-','-','-','-','-','-'],
+    ['N','-','-','-','-','P','-','-'],
+    ['O','-','-','-','-','P','-','-'],
+    ['P','-','-','-','-','-','-','-'],
+    ['Q','-','-','-','-','-','-','-'],
+    ['R','-','-','-','-','-','-','-']
 ]
 
 
 
 def recorrido(Expresion):
 
-    EstadosAceptacion = ['C'] ; Resultante = "A"
+    EstadosAceptacion = ['D','E','G','I','L','N','M','O','K','H','P','Q','R','S'] ; Resultante = "A"
 
     if len(Expresion) == 0:
         print("Ingrese Una expresión")
@@ -21,12 +44,11 @@ def recorrido(Expresion):
 
     
     for a in range(len(Expresion)):
-
         fila_index = None; columna_index = None;
 
     #! VALIDACIONES
         empytchek = Resultante[-1]
-        if empytchek =='0':
+        if empytchek =='0' or empytchek == '-' or empytchek == ' ':
             print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
             return
         
