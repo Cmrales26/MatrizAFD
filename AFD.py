@@ -14,7 +14,7 @@ matriz = [
     ['D','-','-','-','H','-','-','G'],
     ['E','-','-','-','-','-','-','I'],
     ['F','-','-','-','-','-','-','G'],
-    ['G','J','-','-','-','-','K','G'],
+    ['G','J','-','-','-','-','K','-'],
     ['H','-','-','-','-','-','L','-'],
     ['I','L','-','-','-','-','M','-'],
     ['J','N','O','-','-','-','-','-'],
@@ -32,7 +32,7 @@ matriz = [
 
 def recorrido(Expresion):
 
-    EstadosAceptacion = ['D','E','G','I','L','N','M','O','K','H','P','Q','R','S'] ; Resultante = "A"
+    EstadosAceptacion = ['C','D','E','H','K','M','N','O','P','Q','R'] ; Resultante = "A"
 
     if len(Expresion) == 0:
         print("Ingrese Una expresión")
