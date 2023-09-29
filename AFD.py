@@ -1,9 +1,3 @@
-# a = input ("Ingrese una cadena: ") #INGRESA LA CADENA
-# expresion = list(a) #SEPARA LA CADENA EN CARACTERES
-
-
-# Definir la matriz
-# Crear una matriz
 matriz = [
     [' ','a', 'b', 'c'],
     ['A', 'A', 'A', 'B'],
@@ -11,35 +5,57 @@ matriz = [
     ['C', 'C', 'C', '0']
 ]
 
-EstadosAceptacion = ['C']
 
-# Definir las variables columna y fila
-Resultante = "A"
-Expresion = "acba"
 
-for a in range(len(Expresion)):
-# Encontrar el índice de la fila
-    for i in range(len(matriz)):
-        if matriz[i][0] == Resultante[-1]:
-            fila_index = i
-            break
+def recorrido(Expresion):
 
-# Encontrar el índice de la columna
-    for j in range(len(matriz[0])):
-        fila = list(Expresion[a])
-        if matriz[0][j] == "".join(fila):
-            columna_index = j
-            break
+    EstadosAceptacion = ['C'] ; Resultante = "A"
 
-# Verificar si se encontraron los índices y obtener el valor
-    if fila_index is not None and columna_index is not None:
-        valor = matriz[fila_index][columna_index]
-        Resultante = Resultante+valor
+    if len(Expresion) == 0:
+        print("Ingrese Una expresión")
+        return
+
+    if Expresion.find(" ") != -1 :
+        print("La expresión no puede contener espacios vacíos")
+        return
+
+    
+    for a in range(len(Expresion)):
+
+        fila_index = None; columna_index = None;
+
+    #! VALIDACIONES
+        empytchek = Resultante[-1]
+        if empytchek =='0':
+            print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
+            return
+        
+        for i in range(len(matriz)):
+            if matriz[i][0] == Resultante[-1]:
+                fila_index = i
+                break
+            
+        # Encontrar el índice de la columna
+        for j in range(len(matriz[0])):
+            fila = list(Expresion[a])
+            if matriz[0][j] == "".join(fila):
+                columna_index = j
+                break
+            else:
+                columna_index = None
+
+        # Verificar si se encontraron los índices y obtener el valor
+        if fila_index is not None and columna_index is not None:
+            valor = matriz[fila_index][columna_index]
+            Resultante = Resultante + valor
+        else:
+            print("No se encontró la fila o columna especificada.")
+            return
+
+    if Resultante[-1] in EstadosAceptacion:
+        print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *ACEPTADA*")
     else:
-        print("No se encontró la fila o columna especificada.")
+        print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
 
 
-if Resultante[-1] in EstadosAceptacion:
-    print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *ACEPTADA*")
-else:
-    print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
+recorrido(input("Ingrese su expresión Regular: "))
