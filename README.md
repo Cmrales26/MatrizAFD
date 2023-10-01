@@ -21,7 +21,7 @@ La función `recorrido` toma una cadena como entrada y procesa cada carácter de
 ```
 Este ciclo recorre la la primera columna buscando el valor del ultimo caracter de la variable `Resultante`, la cual lamacena el recorrido. Una vez lo encuentre almacena su posición en `fila_index`.
 
-###Obtener la Columna
+### Obtener la Columna
 ```python
 for j in range(len(matriz[0])):
     fila = list(Expresion[a])
