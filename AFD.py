@@ -27,6 +27,7 @@
 #     ['Q','-','-','-','-','-','-','-'],
 #     ['R','-','-','-','-','-','-','-']
 # ]
+    
 
 matriz = [
     [' ', 'a', 'b', 'c', 'd', 'e', 'f', ':'],
@@ -44,19 +45,17 @@ matriz = [
 ]
 
 
-
-
 def recorrido(Expresion):
 
     EstadosAceptacion = ['C','D','G', 'J'] ; Resultante = "A"
     # EstadosAceptacion = ['C','D','E','H','K','M','N','O','P','Q','R'] ; Resultante = "A"
 
     if len(Expresion) == 0:
-        print("Ingrese Una expresión")
+        print("Vació no es una cadena aceptada")
         return
 
     if Expresion.find(" ") != -1 :
-        print("La expresión no puede contener espacios vacíos")
+        print("La cadena no puede contener espacios vacíos")
         return
 
     
@@ -66,7 +65,7 @@ def recorrido(Expresion):
     #! VALIDACIONES
         empytchek = Resultante[-1]
         if empytchek =='0' or empytchek == '-' or empytchek == ' ':
-            print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
+            print(f"El recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
             return
         
         for i in range(len(matriz)):
@@ -74,7 +73,6 @@ def recorrido(Expresion):
                 fila_index = i
                 break
             
-        # Encontrar el índice de la columna
         for j in range(len(matriz[0])):
             fila = list(Expresion[a])
             if matriz[0][j] == "".join(fila):
@@ -83,7 +81,6 @@ def recorrido(Expresion):
             else:
                 columna_index = None
 
-        # Verificar si se encontraron los índices y obtener el valor
         if fila_index is not None and columna_index is not None:
             valor = matriz[fila_index][columna_index]
             Resultante = Resultante + valor
@@ -92,9 +89,9 @@ def recorrido(Expresion):
             return
 
     if Resultante[-1] in EstadosAceptacion:
-        print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *ACEPTADA*")
+        print(f"Para la cadena {Expresion}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *ACEPTADA*")
     else:
-        print(f"El recorrido del grafo fue:{Resultante} por lo que la Expresión es *RECHAZADA*")
+        print(f"Para la cadena {Expresion}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
 
 
-recorrido(input("Ingrese su expresión Regular: "))
+recorrido(input("Ingrese una cadena: "))
