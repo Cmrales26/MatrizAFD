@@ -47,7 +47,7 @@ Si al final del procesamiento, la máquina se encuentra que la ultima posición 
 ## Uso
 Para usar este código, simplemente llama a la función `recorrido` con una cadena como argumento. Por ejemplo: `aa:f`.
 
-#Desarrollado por
+# Desarrollado por
 - [Nelson Morales](https://github.com/Cmrales26)
 - [Diana Vidal](https://github.com/Dicavimer)
 - [Sharith Blanco](https://github.com/Sblanco16)
