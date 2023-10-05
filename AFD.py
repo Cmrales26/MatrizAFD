@@ -1,10 +1,20 @@
-a = ['0'] #0
-b = [str(i) for i in range(1, 10)] # Hora Minutos
-c = ['10', '11'] # Horas
-d = [str(i) for i in range(12, 24)] # Horas
-e = ['T', 't'] #Letra
-f = [str(i) for i in range(10, 60)] # Minutos
-dp = [":"] # :
+DiccionarioHoras = {
+    '0': 'a',
+    **{str(i): 'b' for i in range(1, 10)},  # Hora Minutos
+    **{str(i): 'c' for i in range(10, 12)},  # Horas
+    **{str(i): 'd' for i in range(12, 24)},  # Horas
+    **{'T': 'e', 't': 'e'},  # Letra
+}
+
+# MINUTOS
+
+DiccionarioMinutos = {
+    '0': 'a',
+    **{str(i): 'b' for i in range(1, 10)},  # Hora Minutos
+    **{'T': 'e', 't': 'e'},  # Letra
+    **{str(i): 'f' for i in range(10, 60)},   # Minutos
+    ':': ':'  # :
+}
 
 
 matriz = [
@@ -42,40 +52,19 @@ def separar(expression):
     cadena = ''; cadenaletras = ''
     
     for z in range(len(expres)):
-        cadena = cadena + expres[z]
-        if ':' in cadena: 
-            if expres[z] in dp:
-                cadenaletras += ':'
-            elif expres[z] in a:
-                cadenaletras += 'a'
-            elif expres[z] in b:
-                cadenaletras += 'b'
-            elif expres[z] in f:
-                cadenaletras += 'f'
-            elif expres[z] in e:
-                cadenaletras += 'e'
-            else:
-                cadenaletras += '-'
+        cadena += expres[z]
+        if ":" in cadena:
+            letra = DiccionarioMinutos.get(expres[z], '-')
+            cadenaletras += letra
         else:
-            if expres[z] in a:
-                cadenaletras += 'a'
-            elif expres[z] in b:
-                cadenaletras += 'b'
-            elif expres[z] in c:
-                cadenaletras += 'c'
-            elif expres[z] in d:
-                cadenaletras += 'd'
-            elif expres[z] in e:
-                cadenaletras += 'e'
-            else:
-                cadenaletras += '-'
+            letra = DiccionarioHoras.get(expres[z], '-')
+            cadenaletras += letra
 
     recorrido(cadenaletras,expression)
 
 def recorrido(cadena,hora):
 
     EstadosAceptacion = ['C','D','G', 'J'] ; Resultante = "A"
-    # EstadosAceptacion = ['C','D','E','H','K','M','N','O','P','Q','R'] ; Resultante = "A"
 
     if len(cadena) == 0:
         print("Vació no es una cadena aceptada")
@@ -92,7 +81,7 @@ def recorrido(cadena,hora):
     #! VALIDACIONES
         empytchek = Resultante[-1]
         if empytchek =='0' or empytchek == '-' or empytchek == ' ':
-            print(f"El recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
+            print(f"Para la hora: {hora}, El recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
             return
         
         for i in range(len(matriz)):
@@ -112,7 +101,7 @@ def recorrido(cadena,hora):
             valor = matriz[fila_index][columna_index]
             Resultante = Resultante + valor
         else:
-            print("No se encontró la fila o columna especificada.")
+            print(f"Para la hora: {hora}, El recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
             return
 
     if Resultante[-1] in EstadosAceptacion:
@@ -122,3 +111,11 @@ def recorrido(cadena,hora):
 
 
 separar(input("Ingrese una hora: "))
+
+
+# tesing = ["00:00","23:50","00:75","24:00","9:30","00:48","0:30",":40","00:00t","9:40t","22:40t","15","8t","9", "0t"]
+
+
+
+# for valor in tesing:
+#     result = separar(valor)
