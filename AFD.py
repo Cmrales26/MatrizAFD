@@ -70,9 +70,6 @@ def separar(expression):
             else:
                 cadenaletras += '-'
 
-        
-    print(cadena)
-    print(cadenaletras)
     recorrido(cadenaletras,expression)
 
 def recorrido(cadena,hora):
