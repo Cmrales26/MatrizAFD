@@ -1,33 +1,11 @@
-# matriz = [
-#     [' ','a', 'b', 'c'],
-#     ['A', 'A', 'A', 'B'],
-#     ['B', 'C', 'C', '0'],
-#     ['C', 'C', 'C', '0']
-# ]
+a = ['0'] #0
+b = [str(i) for i in range(1, 10)] # Hora Minutos
+c = ['10', '11'] # Horas
+d = [str(i) for i in range(12, 24)] # Horas
+e = ['T', 't'] #Letra
+f = [str(i) for i in range(10, 60)] # Minutos
+dp = [":"] # :
 
-
-# matriz = [
-#     [' ','a','b','c','d','e','f',':'],
-#     ['A','B','C','D','E','-','-','-'],
-#     ['B','F','c','-','-','-','-','G'],
-#     ['C','-','-','-','-','H','-','G'],
-#     ['D','-','-','-','-','H','-','G'],
-#     ['E','-','-','-','-','-','-','I'],
-#     ['F','-','-','-','-','-','-','G'],
-#     ['G','J','-','-','-','-','K','-'],
-#     ['H','-','-','-','-','-','L','-'],
-#     ['I','L','-','-','-','-','M','-'],
-#     ['J','N','O','-','-','-','-','-'],
-#     ['K','-','-','-','-','P','-','-'],
-#     ['L','Q','R','-','-','-','-','-'],
-#     ['M','-','-','-','-','-','-','-'],
-#     ['N','-','-','-','-','P','-','-'],
-#     ['O','-','-','-','-','P','-','-'],
-#     ['P','-','-','-','-','-','-','-'],
-#     ['Q','-','-','-','-','-','-','-'],
-#     ['R','-','-','-','-','-','-','-']
-# ]
-    
 
 matriz = [
     [' ', 'a', 'b', 'c', 'd', 'e', 'f', ':'],
@@ -45,21 +23,72 @@ matriz = [
 ]
 
 
-def recorrido(Expresion):
+
+def separar(expression):
+    expres = [] 
+    i = 0
+    while i < len(expression):
+        if expression[i].isdigit():
+            if expression[i] != '0' and i + 1 < len(expression) and expression[i + 1].isdigit():
+                expres.append(expression[i] + expression[i + 1])
+                i += 2
+            else:
+                expres.append(expression[i])
+                i += 1
+        else:
+            expres.append(expression[i])
+            i += 1
+
+    cadena = ''; cadenaletras = ''
+    for z in range(len(expres)):
+        cadena = cadena + expres[z]
+        if ':' in cadena: 
+            if expres[z] in dp:
+                cadenaletras += ':'
+            elif expres[z] in a:
+                cadenaletras += 'a'
+            elif expres[z] in b:
+                cadenaletras += 'b'
+            elif expres[z] in f:
+                cadenaletras += 'f'
+            elif expres[z] in e:
+                cadenaletras += 'e'
+            else:
+                cadenaletras += '-'
+        else:
+            if expres[z] in a:
+                cadenaletras += 'a'
+            elif expres[z] in b:
+                cadenaletras += 'b'
+            elif expres[z] in c:
+                cadenaletras += 'c'
+            elif expres[z] in d:
+                cadenaletras += 'd'
+            elif expres[z] in e:
+                cadenaletras += 'e'
+            else:
+                cadenaletras += '-'
+
+        
+    print(cadena)
+    print(cadenaletras)
+    recorrido(cadenaletras,expression)
+
+def recorrido(cadena,hora):
 
     EstadosAceptacion = ['C','D','G', 'J'] ; Resultante = "A"
     # EstadosAceptacion = ['C','D','E','H','K','M','N','O','P','Q','R'] ; Resultante = "A"
 
-    if len(Expresion) == 0:
+    if len(cadena) == 0:
         print("Vació no es una cadena aceptada")
         return
 
-    if Expresion.find(" ") != -1 :
+    if cadena.find(" ") != -1 :
         print("La cadena no puede contener espacios vacíos")
         return
 
     
-    for a in range(len(Expresion)):
+    for a in range(len(cadena)):
         fila_index = None; columna_index = None;
 
     #! VALIDACIONES
@@ -74,7 +103,7 @@ def recorrido(Expresion):
                 break
             
         for j in range(len(matriz[0])):
-            fila = list(Expresion[a])
+            fila = list(cadena[a])
             if matriz[0][j] == "".join(fila):
                 columna_index = j
                 break
@@ -89,9 +118,9 @@ def recorrido(Expresion):
             return
 
     if Resultante[-1] in EstadosAceptacion:
-        print(f"Para la cadena {Expresion}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *ACEPTADA*")
+        print(f"Para la hora: {hora}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *ACEPTADA*")
     else:
-        print(f"Para la cadena {Expresion}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
+        print(f"Para la hora: {hora}, el recorrido del grafo fue:{Resultante} por lo que la Cadena es *RECHAZADA*")
 
 
-recorrido(input("Ingrese una cadena: "))
+separar(input("Ingrese una hora: "))
