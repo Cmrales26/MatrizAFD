@@ -40,6 +40,7 @@ def separar(expression):
             i += 1
 
     cadena = ''; cadenaletras = ''
+    
     for z in range(len(expres)):
         cadena = cadena + expres[z]
         if ':' in cadena: 
